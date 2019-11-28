@@ -27,7 +27,10 @@ class ProductController extends Controller
 
     public function  getProductByCategoryId(Request $request){
         try{
-            $products = Product::with(['categories','attributes_values'])->get();
+            $id = $request->id;
+            $products = Product::with(['categories','attributes_values'])->whereHas('categories',function($query) use ($id){
+                $query->where('category_id',$id);
+            })->get();
             if($products){
                 foreach($products as $product){
                     $attribute = [];

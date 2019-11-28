@@ -27,7 +27,7 @@ class ProductController extends Controller
         return view('admin.product.add',compact('cates','sizes','colors'));
     }
 
-    public function postAddProduct(Request $request){
+    public function postAddProduct(AddProductRequest $request){
         $title = $request->get('title');
         $price = $request->get('price');
         $desc = $request->get('desc');
