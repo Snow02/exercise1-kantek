@@ -76,7 +76,7 @@ class ProductController extends Controller
 
     public function editProduct($id){
         $cates = Category::all();
-        $product = Product::find($id);
+        $product = Product::whereId($id)->with(['categories','attributes_values'])->first();
         $cates_product_id = $product->categories->pluck('id')->toArray();
         $sizes = AttributeValue::where('attribute_id',1)->get();
         $sizes_product_id = $product->attributes_values->where('attribute_id',1)->pluck('id')->toArray();
